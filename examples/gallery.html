@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>gallery</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="css/co.css">
+    <link rel="stylesheet" href="css/common.css">
+    <style>
+        </style>
+
+</head>
+<body>
+    <header class="ui-nav-bar">
+        <div class="ui-nav-bar-inner">
+            <a class="ui-nav-action-back ui-nav-bar-link"> <i class="ui-nav-bar-icon ui-nav-bar-left ui-icon-left-nav"><span class="ui-nav-bar-des"></span></i> 
+            </a>
+            <h1 class="ui-nav-bar-title">Gallery</h1>
+            <a class="ui-nav-bar-link"> <i class="ui-nav-bar-icon ui-nav-bar-right fa-book"></i>
+            </a>
+        </div>
+    </header>
+    <a id='pick' class="button button-block button-rounded button-highlight button-large">从系统相册选择文件</a>
+    <a id='save' class="button button-block button-rounded button-highlight button-large">保存文件到系统相册中</a>
+
+    <div id="logP">
+        <div id="log">gallery模块管理系统相册，支持从相册中选择图片或视频文件、保存图片或视频文件到相册等功能。</div>
+    </div>
+    <script src="../dist/k6.js"></script>
+    <script src="js/debug.js"></script>
+    <script src="js/dom.js"></script>
+    <script src="js/co.js"></script>
+    <script src="js/common.js"></script>
+</body>
+<script>
+    var view = app.currentView();
+    domReady(function(require) {
+        regTarget('doc/gallery.html','Gallery Doc')
+        
+        $('#pick').button(function(el, evt) {
+            app.gallery.pick(function(path) {
+                printout('您选择的文件是：'+ path)
+            });
+        })
+
+        $('#save').button(function(el, evt) {
+			app.gallery.save("cpt://img/q.jpg",function() {
+		           printout('保存成功！');
+		     });
+        })
+
+
+    });
+
+    
+</script>
+</html>
