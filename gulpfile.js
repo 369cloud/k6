@@ -124,7 +124,7 @@ gulp.task('build', gulp.series('cleanDist', 'dist-native'));
 gulp.task('watch', function(cb) {
     var server = livereload();
     livereload.listen();
-    gulp.watch(paths.source + '**/*.*', gulp.series('build'));
+    gulp.watch(paths.source.root + '**/*.*', gulp.series('build'));
     cb();
 });
 
